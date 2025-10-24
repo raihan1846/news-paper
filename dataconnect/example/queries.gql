@@ -1,0 +1,52 @@
+query ListPublicLists @auth(level: PUBLIC, insecureReason: "This operation is safe to expose to the public") {
+  lists(where: {isPublic: {eq: true}}) {
+    id
+    name
+    description
+    createdAt
+    updatedAt
+  }
+}
+
+query GetListById($id: UUID!) @auth(level: USER) {
+  list(id: $id) {
+    id
+    name
+    description
+    createdAt
+    updatedAt
+    isPublic
+    userId
+    listItems_on_list {
+      id
+      position
+      movie {
+        id
+        title
+        year
+      }
+    }
+  }
+}
+
+query GetMoviesByGenre($genre: String!) @auth(level: PUBLIC, insecureReason: "This operation is safe to expose to the public") {
+  movies(where: {genres: {includes: $genre}}) {
+    id
+    title
+    year
+    summary
+    runtime
+    genres
+  }
+}
+
+mutation CreateNewList($name: String!, $description: String!, $isPublic: Boolean!) @auth(level: USER) {
+  list_insert(data: {
+    name: $name,
+    description: $description,
+    isPublic: $isPublic,
+    createdAt_expr: "request.time",
+    updatedAt_expr: "request.time",
+    userId_expr: "auth.uid"
+  })
+}

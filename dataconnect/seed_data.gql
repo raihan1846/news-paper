@@ -1,0 +1,112 @@
+mutation CreateDemoData @transaction @auth(level: PUBLIC, insecureReason: "This mutation is used to seed the database with example data and is safe to expose to the public") {
+  user_insertMany(data: [
+    {
+      id: "550e8400-e29b-41d4-a716-446655440000",
+      displayName: "demouser1",
+      createdAt: "2024-03-15T12:00:00Z",
+      email: "demouser1@example.com",
+      photoUrl: "https://example.com/demouser1.jpg"
+    },
+    {
+      id: "550e8400-e29b-41d4-a716-446655440001",
+      displayName: "demouser2",
+      createdAt: "2024-03-15T13:00:00Z",
+      email: "demouser2@example.com",
+      photoUrl: "https://example.com/demouser2.jpg"
+    }
+  ])
+  movie_insertMany(data: [
+    {
+      id: "650e8400-e29b-41d4-a716-446655440000",
+      title: "Example Movie 1",
+      createdAt: "2024-03-15T14:00:00Z",
+      year: 2023,
+      runtime: 120,
+      summary: "An example movie summary.",
+      genres: ["Action", "Adventure"]
+    },
+    {
+      id: "650e8400-e29b-41d4-a716-446655440001",
+      title: "Example Movie 2",
+      createdAt: "2024-03-15T15:00:00Z",
+      year: 2024,
+      runtime: 110,
+      summary: "Another example movie summary.",
+      genres: ["Comedy", "Romance"]
+    }
+  ])
+  list_insertMany(data: [
+    {
+      id: "750e8400-e29b-41d4-a716-446655440000",
+      name: "Example List 1",
+      createdAt: "2024-03-15T16:00:00Z",
+      updatedAt: "2024-03-15T16:00:00Z",
+      isPublic: true,
+      description: "An example list description.",
+      userId: "550e8400-e29b-41d4-a716-446655440000"
+    },
+    {
+      id: "750e8400-e29b-41d4-a716-446655440001",
+      name: "Example List 2",
+      createdAt: "2024-03-15T17:00:00Z",
+      updatedAt: "2024-03-15T17:00:00Z",
+      isPublic: false,
+      description: "Another example list description.",
+      userId: "550e8400-e29b-41d4-a716-446655440001"
+    }
+  ])
+  listItem_insertMany(data: [
+    {
+      id: "850e8400-e29b-41d4-a716-446655440000",
+      listId: "750e8400-e29b-41d4-a716-446655440000",
+      movieId: "650e8400-e29b-41d4-a716-446655440000",
+      position: 1
+    },
+    {
+      id: "850e8400-e29b-41d4-a716-446655440001",
+      listId: "750e8400-e29b-41d4-a716-446655440001",
+      movieId: "650e8400-e29b-41d4-a716-446655440001",
+      position: 1
+    }
+  ])
+  watch_insertMany(data: [
+    {
+      id: "950e8400-e29b-41d4-a716-446655440000",
+      movieId: "650e8400-e29b-41d4-a716-446655440000",
+      userId: "550e8400-e29b-41d4-a716-446655440000",
+      createdAt: "2024-03-15T18:00:00Z",
+      watchDate: "2024-03-16",
+      location: "Home"
+    },
+    {
+      id: "950e8400-e29b-41d4-a716-446655440001",
+      movieId: "650e8400-e29b-41d4-a716-446655440001",
+      userId: "550e8400-e29b-41d4-a716-446655440001",
+      createdAt: "2024-03-15T19:00:00Z",
+      watchDate: "2024-03-17",
+      location: "Work"
+    }
+  ])
+  review_insertMany(data: [
+    {
+      id: "a50e8400-e29b-41d4-a716-446655440000",
+      movieId: "650e8400-e29b-41d4-a716-446655440000",
+      userId: "550e8400-e29b-41d4-a716-446655440000",
+      watchId: "950e8400-e29b-41d4-a716-446655440000",
+      createdAt: "2024-03-15T20:00:00Z",
+      rating: 5,
+      reviewText: "Great movie!",
+      isPublic: true
+    },
+    {
+      id: "a50e8400-e29b-41d4-a716-446655440001",
+      movieId: "650e8400-e29b-41d4-a716-446655440001",
+      userId: "550e8400-e29b-41d4-a716-446655440001",
+      watchId: "950e8400-e29b-41d4-a716-446655440001",
+      createdAt: "2024-03-15T21:00:00Z",
+      rating: 4,
+      reviewText: "Good movie!",
+      isPublic: false
+    }
+  ])
+}
